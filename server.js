@@ -29,7 +29,7 @@ var API = new Jammin.API({
   databaseURL: DatabaseURL,
   swagger: {
     info: {title: 'Pet Store', version: '0.1'},
-    host: 'api.example.com',
+    host: process.env.API_HOST || 'jammin-petstore.herokuapp.com',
     basePath: '/api',
     securityDefinitions: {
       username: { name: 'username', in: 'header', type: 'string'},

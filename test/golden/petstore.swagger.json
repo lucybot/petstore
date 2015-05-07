@@ -3,7 +3,7 @@
     "title": "Pet Store",
     "version": "0.1"
   },
-  "host": "api.example.com",
+  "host": "jammin-petstore.herokuapp.com",
   "basePath": "/api",
   "securityDefinitions": {
     "username": {
