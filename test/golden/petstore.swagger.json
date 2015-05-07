@@ -1,0 +1,544 @@
+{
+  "info": {
+    "title": "Pet Store",
+    "version": "0.1"
+  },
+  "host": "api.example.com",
+  "basePath": "/api",
+  "securityDefinitions": {
+    "username": {
+      "name": "username",
+      "in": "header",
+      "type": "string"
+    },
+    "password": {
+      "name": "password",
+      "in": "header",
+      "type": "string"
+    }
+  },
+  "definitions": {
+    "Pet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "number"
+        },
+        "name": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "animalType": {
+          "type": "string"
+        },
+        "vaccinations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          }
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password_hash": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "swagger": "2.0",
+  "paths": {
+    "/users": {
+      "post": {
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "username": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "description": "Adds a User",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieves an array of Users",
+        "parameters": [
+          {
+            "name": "username",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by username"
+          },
+          {
+            "name": "password_hash",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by password_hash"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of Users",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pets/{id}": {
+      "get": {
+        "description": "Retrieves a Pet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "number",
+            "description": "Select by id"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "description": "Select by name"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "type": "string",
+            "description": "Select by owner"
+          },
+          {
+            "name": "animalType",
+            "in": "query",
+            "type": "string",
+            "description": "Select by animalType"
+          },
+          {
+            "name": "vaccinations",
+            "in": "query",
+            "type": "array",
+            "description": "Select by vaccinations"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Pet",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          }
+        }
+      },
+      "post": {
+        "security": {
+          "username": [],
+          "password": []
+        },
+        "description": "Adds a Pet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "number",
+            "description": "Select by id"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            },
+            "description": "A Pet to create."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "patch": {
+        "security": {
+          "username": [],
+          "password": []
+        },
+        "description": "Updates a Pet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "number",
+            "description": "Select by id"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "description": "Select by name"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "type": "string",
+            "description": "Select by owner"
+          },
+          {
+            "name": "animalType",
+            "in": "query",
+            "type": "string",
+            "description": "Select by animalType"
+          },
+          {
+            "name": "vaccinations",
+            "in": "query",
+            "type": "array",
+            "description": "Select by vaccinations"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            },
+            "description": "Pet fields to update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Pet",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": {
+          "username": [],
+          "password": []
+        },
+        "description": "Removes a Pet",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "number",
+            "description": "Select by id"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "description": "Select by name"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "type": "string",
+            "description": "Select by owner"
+          },
+          {
+            "name": "animalType",
+            "in": "query",
+            "type": "string",
+            "description": "Select by animalType"
+          },
+          {
+            "name": "vaccinations",
+            "in": "query",
+            "type": "array",
+            "description": "Select by vaccinations"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/pets": {
+      "get": {
+        "description": "Retrieves an array of Pets",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "number",
+            "description": "Filter by id"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by name"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by owner"
+          },
+          {
+            "name": "animalType",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by animalType"
+          },
+          {
+            "name": "vaccinations",
+            "in": "query",
+            "type": "array",
+            "description": "Filter by vaccinations"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of Pets",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "security": {
+          "username": [],
+          "password": []
+        },
+        "description": "Adds an array of Pets",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
+              }
+            },
+            "description": "An array of Pets to create."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "patch": {
+        "security": {
+          "username": [],
+          "password": []
+        },
+        "description": "Updates an array of Pets",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "number",
+            "description": "Filter by id"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by name"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by owner"
+          },
+          {
+            "name": "animalType",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by animalType"
+          },
+          {
+            "name": "vaccinations",
+            "in": "query",
+            "type": "array",
+            "description": "Filter by vaccinations"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
+              }
+            },
+            "description": "Pet fields to update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "security": {
+          "username": [],
+          "password": []
+        },
+        "description": "Removes an array of Pets",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "number",
+            "description": "Filter by id"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by name"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by owner"
+          },
+          {
+            "name": "animalType",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by animalType"
+          },
+          {
+            "name": "vaccinations",
+            "in": "query",
+            "type": "array",
+            "description": "Filter by vaccinations"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/search/pets": {
+      "get": {
+        "description": "Search all pets by name",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "type": "string",
+            "description": "Any regex"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of Pets",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/pet_types": {
+      "get": {
+        "description": "Retrieves an array of Pets",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "type": "number",
+            "description": "Filter by id"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by name"
+          },
+          {
+            "name": "owner",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by owner"
+          },
+          {
+            "name": "animalType",
+            "in": "query",
+            "type": "string",
+            "description": "Filter by animalType"
+          },
+          {
+            "name": "vaccinations",
+            "in": "query",
+            "type": "array",
+            "description": "Filter by vaccinations"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array of Pets",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ]
+}

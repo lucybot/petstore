@@ -1,0 +1,29 @@
+{
+  "name": "petstore",
+  "version": "1.0.0",
+  "description": "Sample Petstore built with Jammin",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucybot/petstore.git"
+  },
+  "author": "Bobby Brennan <bobby@lucybot.com> (https://lucybot.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lucybot/petstore/issues"
+  },
+  "homepage": "https://github.com/lucybot/petstore",
+  "dependencies": {
+    "cors": "^2.6.0",
+    "express": "^4.12.3",
+    "jammin": "^0.1.2",
+    "password-hash": "^1.2.2",
+    "request": "^2.55.0"
+  },
+  "devDependencies": {
+    "chai": "^2.3.0"
+  }
+}
