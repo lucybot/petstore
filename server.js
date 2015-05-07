@@ -4,9 +4,12 @@ var App = require('express')();
 var Jammin = require('jammin');
 App.use(require('cors')());
 
-module.exports.listen = function(port) {
-  console.log('listening: ' + port);
-  App.listen(port || 3000);
+if (require.main === module) {
+  App.listen(process.env.PORT || 3000);
+} else {
+  module.exports.listen = function(port) {
+    App.listen(port || 3000);
+  }
 }
 
 module.exports.dropAllEntries = function(callback) {
@@ -19,7 +22,9 @@ module.exports.dropAllEntries = function(callback) {
   })
 }
 
-var DatabaseURL = JSON.parse(FS.readFileSync('./creds/mongo.json', 'utf8')).url;
+var DatabaseURL = process.env.HEROKU
+    ? process.env.DATABASE_URL
+    : JSON.parse(FS.readFileSync('./creds/mongo.json', 'utf8')).url;
 var API = new Jammin.API({
   databaseURL: DatabaseURL,
   swagger: {
